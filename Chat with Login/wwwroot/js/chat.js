@@ -6,8 +6,12 @@ var connection = new signalR.HubConnectionBuilder()
 
 connection.on("ReceiveMessage", function (message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var div = document.createElement("div");
-    div.innerHTML = msg + "<hr/>";
+    var div = document.createElement("li");
+    var currentdate = new Date();
+    var datetime = currentdate.getHours() + ":"
+        + currentdate.getMinutes() + ":"
+        + currentdate.getSeconds();
+    div.innerHTML = "<div class='message-data'><span class='message-data-name'><i class='fa fa-circle online'></i>" + document.getElementById("username").innerHTML + "</span>&nbsp;&nbsp;<span class='message-data-time'>" + datetime + "</span></div ><div class='messagebox my-message'>" + msg + "</div>";
     document.getElementById("messages").appendChild(div);
 });
 
@@ -21,7 +25,7 @@ connection.start().catch(function (err) {
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-    var message = document.getElementById("message").value;
+    var message = document.getElementById("message-to-send").value;
 
     connection.invoke("SendMessageToGroup", document.getElementById("GroupName").value, message).catch(function (err) {
             return console.error(err.toString());
