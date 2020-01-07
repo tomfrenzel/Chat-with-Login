@@ -6,7 +6,7 @@
 
 body {
     background: #C5DDEB;
-    font: 14px/20px "Lato", Arial, sans-serif;
+    font: 14px/20px "Lato", Arial, sans-serif!important;
     padding: 40px 0;
     color: white;
 }
@@ -36,7 +36,18 @@ body {
         width: 90%;
         font-size: 14px;
     }
+#GroupName::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
 
+#GroupName:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+#GroupName::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+}
     .people-list .fa-search {
         position: relative;
         left: -25px;

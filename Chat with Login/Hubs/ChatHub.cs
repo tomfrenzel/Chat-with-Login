@@ -24,12 +24,12 @@ namespace Chat_with_Login.Hubs
 
         public override async Task OnDisconnectedAsync(Exception ex)
         {
-            await Clients.All.SendAsync("UserDisconnected", Context.ConnectionId);
+            await Clients.All.SendAsync("UserDisconnected");
             await base.OnDisconnectedAsync(ex);
         }
-        public Task SendMessageToGroup(string group, string message)
+        public async Task SendMessageToGroup(string group, string message, string user)
         {
-            return Clients.Group(group).SendAsync("ReceiveMessage", message);
+            await Clients.Group(group).SendAsync("ReceiveMessage", message, user);
         }
     }
 }
