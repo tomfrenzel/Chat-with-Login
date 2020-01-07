@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Home page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4" style="margin-bottom:100px">Welcome @User.Identity.Name</h1>
+        <div class="key" style="margin-bottom:50px">
+            <div style="display:inline">
+                <input placeholder="Enter Room Key" id="GroupName" value="" />
+            </div>
+            <div style="display:inline">
+                <input type="button" id="joinGroup" value="Enter Room" />
+            </div>
+        </div>
+        <div class="message">
+            <input name="message" id="message"></input>
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
+<br />
+    <div id="messages"></div>
+
+<p id="username" style="display:none">@User.Identity.Name</p>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
